@@ -1,6 +1,14 @@
 
 
 <h1>Listing Posts</h1>
+<%= render 'form' %>
+
+<div class="buscar">
+  <label>buscar: <input class="search" type="text" name="query" placeholder="ingresa la busqueda
+    ">
+  </label>
+
+</div>
 
 <table>
   <thead>
@@ -12,18 +20,27 @@
   </thead>
 
   <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= post.content %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+    <!-- refactoring en _post aca render @posts-->
+    <div class="posts">
+      <%= render @posts %>
+    </div>
   </tbody>
 </table>
 
 <br>
 
 <%= link_to 'New Post', new_post_path %>
+
+<script>
+  $('.search').on('keyup', function(event) {
+    var query = $(this).val();
+    if (query.length >=3 || query.length == 0 ){
+      $.ajax({
+        url: '<%= posts_path %>',
+        type: 'GET',
+        dataType: 'script',
+        data: {q: query},
+      })
+    }
+  });
+</script>

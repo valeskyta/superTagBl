@@ -4,12 +4,26 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    if params[:q].present?
+      @posts = Post.where("title LIKE ?", "%#{params[:q]}%")
+    else
+      @posts = Post.all.reverse
+    end
+
+    # @posts = Post.all.reverse #devuelve todos los posts y los guarda en la variable @posts
+    @post = Post.new #un Post.new es vacio, por que es nuevo y lo guardo en la variable @post
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @comment = @post.comments.build
+    @last_comments = @post.comments.last(5)
   end
 
   # GET /posts/new
@@ -28,11 +42,12 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
+        format.html { redirect_to root_url, notice: 'Post was successfully created.' }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -71,4 +86,4 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:title, :content)
     end
-end
+  end
