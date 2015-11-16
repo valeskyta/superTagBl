@@ -1,46 +1,54 @@
+<div class="container">
+
+  <div class="row">
+
+    <h2>Post your place</h2>
+    <h4>Please put all the details</h4>
+    <%= render 'form' %>
 
 
-<h1>Listing Posts</h1>
-<%= render 'form' %>
+    <div class="buscar">
+      <label>buscar: <input class="search" type="text" name="query" placeholder="type your search">
+      </label>
+    </div>
 
-<div class="buscar">
-  <label>buscar: <input class="search" type="text" name="query" placeholder="ingresa la busqueda
-    ">
-  </label>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Content</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
+      <tbody>
+        <!-- refactoring en _post aca render @posts-->
+        <div class="posts">
+          <%= render @posts %>
+        </div>
+      </tbody>
+    </table>
+
+    <br>
+
+    <script>
+      $('.search').on('keyup', function(event) {
+        var query = $(this).val();
+        if (query.length >=3 || query.length == 0 ){
+          $.ajax({
+            url: '<%= posts_path %>',
+            type: 'GET',
+            dataType: 'script',
+            data: {q: query},
+          })
+        }
+      });
+    </script>
+
+
+
+
+  </div>
 </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <!-- refactoring en _post aca render @posts-->
-    <div class="posts">
-      <%= render @posts %>
-    </div>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Post', new_post_path %>
-
-<script>
-  $('.search').on('keyup', function(event) {
-    var query = $(this).val();
-    if (query.length >=3 || query.length == 0 ){
-      $.ajax({
-        url: '<%= posts_path %>',
-        type: 'GET',
-        dataType: 'script',
-        data: {q: query},
-      })
-    }
-  });
-</script>

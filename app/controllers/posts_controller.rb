@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    @posts = Post.includes(:comments)
     if params[:q].present?
       @posts = Post.where("title LIKE ?", "%#{params[:q]}%")
     else
@@ -22,7 +23,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @comment = @post.comments.build
+    @comments = @post.comments.build
     @last_comments = @post.comments.last(5)
   end
 
@@ -39,6 +40,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post.user = current_user
 
     respond_to do |format|
       if @post.save

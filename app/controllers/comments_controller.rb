@@ -5,9 +5,17 @@ class CommentsController < ApplicationController
     @comment.save
   end
 
+  def to_s
+    comments
+  end
+
   private
   def comments_params
     params.require(:comment).permit(:content)
   end
 end
+
+
+
+
 

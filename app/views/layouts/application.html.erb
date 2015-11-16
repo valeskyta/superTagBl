@@ -1,16 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SuperTagingBlg</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <title>Spanglish</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <!-- Latest compiled and minified JavaScript -->
+
+
 </head>
 <body>
-       <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.4&appId=217776951750890";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
-<%= yield %>
+ <section>
+
+        <%= render "layouts/navbar" %>
+
+ <!--main content start-->
+
+                 <span class="notice text-danger text-center h3" ><%= notice %></span>
+                 <span class="alert text-danger text-center h3"><%= alert %></span>
+
+                <%= yield %>
+
+        <%= render "layouts/footer" %>
+
+    </section>
+
 
 </body>
 </html>
+
+

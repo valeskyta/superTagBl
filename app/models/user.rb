@@ -4,18 +4,21 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable
 
-  # before_create default_role
+  has_many :post
+  has_many :comments
 
-  # enum role: [:admin, :client, :guest]
+  before_create :default_role
 
-  # private
-  # def default_role
-  #   self.role ||=1
-  # end
+  enum role: [:admin, :client, :guest]
 
-  # def to_s
-  #   "#{self.username}"
-  # end
+  private
+  def default_role
+    self.role ||=1
+  end
+
+  def to_s
+    "#{self.username}"
+  end
 
 
 end
