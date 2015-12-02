@@ -1,25 +1,49 @@
-<%= form_for(@post, remote: true) do |f| %>
-  <% if @post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+<div class="[ col-xs-12 col-sm-6 ]" style="padding: 1px 1px 1px 30px">
+  <div class="[ panel panel-default ] panel-google-plus">
+    <div style="padding: 30px">
 
-      <ul>
-      <% @post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+
+
+      <h3>Post your place</h3>
+
+      <%= form_for(@post, remote: true) do |f| %>
+      <% if @post.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+        <ul>
+          <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+      <div class="field">
+        <%= f.label :title, 'Offer' %> <br>
+        <%= f.text_field :title %>
+      </div>
+      <div class="field">
+        <%= f.label :content, 'Description' %> <br>
+        <%= f.text_area :content %>
+      </div>
+      <div class="field">
+        <%= f.label :address, 'Address or area' %> <br>
+        <%= f.text_field :address %>
+      </div>
+      <div class="field">
+        <%= f.label :price, 'Price' %> <br>
+        <%= f.number_field :price %>
+      </div>
+      <div class="field">
+        <%= f.label :photo, 'Pictures' %> <br>
+        <%= f.file_field :photo %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+      <% end %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

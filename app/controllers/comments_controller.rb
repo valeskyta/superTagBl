@@ -3,6 +3,9 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = @post.comments.build(comments_params)
     @comment.save
+    respond_to do |format|
+      format.js
+    end
   end
 
   def to_s

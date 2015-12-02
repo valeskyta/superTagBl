@@ -1,3 +1,3 @@
 var new_post = $('<%= j render partial: @post %>').hide();
 $('.posts').prepend(new_post);
-$('.post_<%= @post.id %>').fadeIn(1000);
+new_post.fadeIn(1000);

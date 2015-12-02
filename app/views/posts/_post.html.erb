@@ -1,84 +1,71 @@
 
-<tr class="post post_<%= post.id %>">
+<div class="[ col-xs-12 col-sm-8 col-sm-offset-2 ]" style="padding: 1px 1px 1px 30px">
+  <div class="[ panel panel-default ] panel-google-plus">
+    <div class="dropdown">
+      <span class="dropdown-toggle" type="button" data-toggle="dropdown">
+        <span class="[ glyphicon glyphicon-chevron-down ]"></span>
+      </span>
 
+    </div>
 
-
-
-
-
-
-
-        <div class="[ col-xs-12 col-sm-5 ]" style="padding: 1px 1px 1px 30px">
-            <div class="[ panel panel-default ] panel-google-plus">
-                <div class="dropdown">
-                    <span class="dropdown-toggle" type="button" data-toggle="dropdown">
-                        <span class="[ glyphicon glyphicon-chevron-down ]"></span>
-                    </span>
-
-                </div>
-
-                <div class="panel-heading">
+    <div class="panel-heading">
 
       <!-- NICKNAME               -->
 
-                    <h5><span>Shared publicly</span> - <span>Jun 27, 2015</span> </h5>
-                </div>
-                <div class="panel-body">
-	                <div class="post post_<%= post.id %>">
-	    <!-- POST -->
-	                     <!-- POST    -->
-	                     <p>Title: <%= post.title %></p>
+      <h5><span>Shared publicly</span> - <span><%= post.created_at.strftime('%d %b %Y, %H:%M') %><span>
 
-	                     <p>Post: <%= post.content %></p>
-	                 </div>
-                </div>
-<!-- ULTIMOS COMENTARIOS -->
-                <div style="background-color: rgb(112, 139, 169); padding: 15px" >
-                  	<% post.comments.each do |c| %>
-						<%= c.content %>
-					<% end %>
-                </div>
 
-                <div class="panel-footer">
-  <!-- ???? PARA QUE ES EL BOTON +1?               -->
+      </h5>
+    </div>
+    <div class="panel-body">
+     <div class="post post_<%= post.id %>">
+       <!-- POST -->
+       <!-- POST    -->
+       <p>Offer: <%= post.title %></p>
+       <p>Description: <%= post.content %></p>
+       <p>Location: <%= post.address %></p>
+       <p>Price: <%= post.price %></p>
 
-                    <button type="button" class="[ btn btn-default ]">
-                        <span class="[ glyphicon glyphicon-share-alt ]"></span>
-                    </button>
-           <!-- PLACEHOLDER COMMENT          -->
+       <%= image_tag(post.photo, width: "400") %>
 
-                    <div class="input-placeholder">Add a comment...</div>
-                </div>
 
-<!-- COMMENT                 -->
-                <div class="panel-google-plus-comment">
+     </div>
+   </div>
+
+  <!-- COMMENT                 -->
+  <div class="panel-google-plus-comment">
 
     <!-- FOTO USUSARIO             -->
-                    <img class="img-circle" src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s46" alt="User Image" />
-                    <div class="panel-google-plus-textarea">
-           <!-- TEXTO COMENTARIO -->
-                        <textarea rows="4"><!-- COMMENT -->
-        </textarea>
-               <!-- BOTON SUBMIT COMMENT          -->
-                        <button type="submit" class="[ btn btn-success disabled ]">Post comment</button>
+    <img class="img-circle" src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s46" alt="User Image" />
+    <div class="panel-google-plus-textarea">
+    <!-- TEXTO COMENTARIO -->
 
+    <div calss="new-comment" style="background-color:gray">
+      <%= form_for [post, Comment.new], remote: true do |f| %>
+        <%= f.label :comment %>
+        <%= f.text_area :content, placeholder: "Add a comment..." %>
 
+        <%= f.submit "Send", class:"btn btn-success"  %>
+      <% end %>
+    </div>
+   </div>
+   <div class="clearfix"></div>
+ </div>
 
-                <!-- BOTON CANEL COMMENT -->
-                        <button type="reset" class="[ btn btn-default ]">Cancel</button>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-                                          <!-- BOTONES SHOW EDIT DESTROY -->
-    <div style="margin-bottom: 20px">
-      <%= link_to 'See more', post %>
-      <%= link_to 'Edit', edit_post_path(post) if can? :edit, post %>
-      <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, post%>
+<!-- BOTONES SHOW EDIT DESTROY -->
+   <!-- ULTIMOS COMENTARIOS -->
+   <div class="comments post_<%= post.id %>" style="background-color: rgb(112, 139, 169); padding: 15px" >
+   <%= render partial: 'comments/comment', collection: post.comments %>
+   </div>
+</div>
 
-        </div>
-        </div>
+<div style="margin-bottom: 20px">
+  <%= link_to 'Show details', post, class:"btn btn-success"  %>
+  <%= link_to 'Edit', edit_post_path(post) if can? :edit, post %>
+  <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, post%>
 
+</div>
+</div>
 
 
 

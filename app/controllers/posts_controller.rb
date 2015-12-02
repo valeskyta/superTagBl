@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+   skip_before_action :verify_authenticity_token
+
 
   # GET /posts
   # GET /posts.json
@@ -8,7 +10,7 @@ class PostsController < ApplicationController
     if params[:q].present?
       @posts = Post.where("title LIKE ?", "%#{params[:q]}%")
     else
-      @posts = Post.all.reverse
+      @posts = Post.all.order('updated_at desc')
     end
 
     # @posts = Post.all.reverse #devuelve todos los posts y los guarda en la variable @posts
@@ -86,6 +88,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content)
+      params.require(:post).permit(:title, :content, :address, :price, :photo )
     end
   end

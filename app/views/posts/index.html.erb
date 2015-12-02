@@ -1,33 +1,25 @@
+
 <div class="container">
 
   <div class="row">
 
-    <h2>Post your place</h2>
-    <h4>Please put all the details</h4>
-    <%= render 'form' %>
-
-
-    <div class="buscar">
-      <label>buscar: <input class="search" type="text" name="query" placeholder="type your search">
-      </label>
+    <div class="[ col-xs-12 col-sm-12 ]" style="padding: 1px 1px 1px 30px">
+      <div class="[ panel panel-default ] panel-google-plus">
+        <div class="buscar"  style="padding: 30px">
+        <label>Search an offer: <input class="search" type="text" name="query" placeholder="type your search">
+          </label>
+        </div>
+      </div>
     </div>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Content</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
 
-      <tbody>
-        <!-- refactoring en _post aca render @posts-->
-        <div class="posts">
-          <%= render @posts %>
-        </div>
-      </tbody>
-    </table>
+    <%= render 'form' %>
+
+    <!-- refactoring en _post aca render @posts-->
+    <div class="posts">
+      <%= render @posts %>
+    </div>
+
 
     <br>
 

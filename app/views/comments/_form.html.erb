@@ -1,8 +1,11 @@
 <div calss="new-comment" style="background-color:gray">
-<%= form_for [@post, @comments] do |f| %>
+<%= form_for [@post, @comments], remote: true do |f| %>
   <%= f.label :comment %>
   <%= f.text_area :content %>
 
-  <%= f.submit "enviar" %>
+  <%= f.submit "Send", class:"btn btn-success"  %>
   <% end %>
 </div>
+
+
+
