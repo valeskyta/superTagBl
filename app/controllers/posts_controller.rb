@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.includes(:comments)
+    @posts = Post.includes(:comments, :user)
     if params[:q].present?
       @posts = Post.where("title LIKE ?", "%#{params[:q]}%")
     else

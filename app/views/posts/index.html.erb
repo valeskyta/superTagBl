@@ -13,13 +13,16 @@
     </div>
 
 
+
     <%= render 'form' %>
 
     <!-- refactoring en _post aca render @posts-->
     <div class="posts">
       <%= render @posts %>
     </div>
-
+    <% @posts.each do |post| %>
+    <p><%= post.user.username %></p>
+    <% end %>
 
     <br>
 
@@ -42,5 +45,7 @@
 
   </div>
 </div>
+
+
 
 

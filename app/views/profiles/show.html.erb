@@ -1,0 +1,41 @@
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<div class="container">
+  <div class="fb-profile">
+    <img align="left" class="fb-image-lg" src="http://lorempixel.com/850/280/nightlife/5/" alt="Profile image example"/>
+    <%= image_tag(@user.picture.thumb_profile, align: 'left', class: "fb-image-profile thumbnail") if @user.picture  %>
+
+    <div class="fb-profile-text">
+      <h2>
+        <% if @user.username %>
+        <%= @user.username %>
+        <% else %>
+        Your Username
+        <% end -%>
+      </h2>
+    </div>
+  </div>
+  <!-- NAILTHUMBS     -->
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <div style="padding:10px 30px">
+
+        <!-- BIO -->
+        <div class="">
+          <h4>
+            <% if @user.bio %>
+            <p><%= @user.bio %></p>
+            <% else %>
+            <h4>Your Bio</h4>
+            <% end -%>
+          </h4>
+        </div>
+
+
+<!--          if can? :edit, @user %> -->
+        <%= link_to 'Edit your Profile', edit_user_registration_path, class: 'btn btn-primary btn-sm', style: 'font-weight:bold' %>
+<!--          end %> -->
+
+      </div>
+    </div>
+  </div>
+</div>
